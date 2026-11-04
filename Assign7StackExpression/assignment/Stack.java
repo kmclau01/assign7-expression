@@ -9,9 +9,15 @@ public class Stack implements StackInterface {
 	@Override
 	public void push(Object item) {
 		Node newnode = new Node(item);
+		if(this.head == null) {
+			this.head = newnode;
+			this.tail =newnode;
+		}
+		else {
 		newnode.next = this.head;
 		this.head.prev = newnode;
 		this.head = newnode;
+		}
 		size++;
 	}
 	
@@ -40,7 +46,9 @@ public class Stack implements StackInterface {
 		this.head = popnode.next;
 		
 		popnode.next = null;
-		this.head.prev = null;
+		if(this.head != null){
+			this.head.prev = null;
+		}
 		size--;
 		return popnode;
 	}
